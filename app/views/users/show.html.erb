@@ -1,1 +1,41 @@
-<h1>Here is the user for the given id</h1>
+<div>
+  <div class="card g-0 my-4">
+    
+    <div class="row align-items-center">
+      <div class="col-md-2">
+        <img src="<%= @user.photo %>" class="img-fluid rounded-start" />
+      </div>
+      <div class="col-md-10">
+        <div class="card-body">
+          <h1 class="card-title"><%= @user.name %></h1>
+          <p class="text-end">
+            Number of posts: <%= @user.posts_counter.nil? ? "0" : @user.posts_counter %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="my-4 p-4 rounded border border-1">
+    <h4>Bio</h4>
+    <p><%= @user.bio %></p>
+  </div>
+
+  <% @user.three_most_recent_posts.each do |recent| %>
+  <div class="rounded p-4 border border-1 my-4">
+    <h4><%= recent.title %></h4>
+    <p><%= recent.text %></p>
+    <div class="text-end">
+        <span class="border border-1 p-1 me-4 bg-info">
+          Comments: <%= recent.comments_counter.nil? ? " 0 " : recent.comments_counter %>
+        </span>
+        <span class="border border-1 p-1 bg-info">
+          Likes: <%= recent.likes_counter.nil? ? "0" : recent.likes_counter %>
+        </span>
+    </div>
+    <%= link_to "Read Post", user_post_path(@user.id, recent), class: "btn btn-primary" %>
+  </div>
+  <% end %>
+  <div class="d-flex justify-content-center my-4">
+    <%= link_to "See all post", user_posts_path(@user.id), class: "btn btn-primary" %>
+  </div>
+</div>

@@ -1,1 +1,24 @@
-<h1>Here is the post for the given user_id</h1>
+<% user = User.find(params[:user_id]) %>
+
+<div class="my-4 p-5 rounded border border-1">
+  <div class="d-flex align-items-center justify-content-between">
+    <h3><%= @post.title %> by <%= user.name %></h3>
+    <div class="text-end">
+      <span class="border border-1 p-1 me-4 bg-info">
+        Comments: <%= @post.comments_counter.nil? ? " 0 " :
+        @post.comments_counter %>
+      </span>
+      <span class="border border-1 p-1 bg-info">
+        Likes: <%= @post.likes_counter.nil? ? "0" : @post.likes_counter %>
+      </span>
+    </div>
+  </div>
+  <hr>
+  <p class="pt-5"><%= @post.text %></p>
+</div>
+
+<div class="border border-1 p-2">
+  <% @post.all_comments.each do |post| %>
+    <%= post.nil? ? "No comment" : user.name + " : " + post.text %>
+  <% end %>
+</div>
