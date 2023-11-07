@@ -17,33 +17,33 @@ describe 'Testing Post/show', type: :feature do
     visit user_posts_path(@user1, @first_post)
   end
 
-  it "I can see the post's title." do
+  it 'I can see the post\'s title' do
     expect(page).to have_content(@first_post.title)
   end
 
-  it 'I can see who wrote the post.' do
+  it 'I can see who wrote the post' do
     expect(page).to have_content(@user1.name)
   end
 
-  it 'I can see how many comments it has.' do
+  it 'I can see how many comments it has' do
     expect(page).to have_content(@first_post.comments_counter)
   end
 
-  it 'I can see how many likes it has.' do
+  it 'I can see how many likes it has' do
     expect(page).to have_content(@first_post.likes_counter)
   end
 
-  it 'I can see the post body.' do
+  it 'I can see the post body' do
     expect(page).to have_content(@first_post.text)
   end
 
-  it 'I can see the username of each commentor.' do
+  it 'I can see the username of each commentor' do
     expect(page).to have_content(@first_comment.user.name)
     expect(page).to have_content(@second_comment.user.name)
     expect(page).to have_content(@third_comment.user.name)
   end
 
-  it 'I can see the comment each commentor left.' do
+  it 'I can see the comment each commentor left' do
     expect(page).to have_content(@first_comment.text)
     expect(page).to have_content(@second_comment.text)
     expect(page).to have_content(@third_comment.text)
