@@ -6,7 +6,7 @@ describe 'testing users/index', type: :feature do
   before(:each) do
     @user1 = User.create(name: 'Mary', photo: 'https://somewhere.com/an_ordinary_photo.jpg', bio: 'Web Developer guy')
 
-    @user2 = User.create(name: 'Tom', photo: 'https://somewhere.com/an_ordinary_photo.jpg',
+    @user2 = User.create(name: 'Bellingham', photo: 'https://somewhere.com/an_ordinary_photo.jpg',
                          bio: 'Bee keeper and bee lover')
 
     @user3 = User.create(name: 'John', photo: 'https://somewhere.com/an_ordinary_photo.jpg',
@@ -35,7 +35,7 @@ describe 'testing users/index', type: :feature do
   end
 
   it 'When I click on a user, I am redirected to that user\'s show page' do
-    visit user_path(@user2)
+    click_on @user2.name
     expect(page).to have_current_path user_path(@user2.id)
   end
 end

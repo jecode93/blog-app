@@ -8,7 +8,7 @@
       </div>
       <div class="col-md-10">
         <div class="card-body">
-          <h1 class="card-title"><%= user.name %></h1>
+          <h1 class="card-title"><%= link_to user.name, user_path(user.id), class: 'text-black link-underline link-underline-opacity-0' %></h1>
           <div class="text-end">
             <p>
               Number of posts: <%= user.posts_counter.nil? ? "0" : user.posts_counter %>
