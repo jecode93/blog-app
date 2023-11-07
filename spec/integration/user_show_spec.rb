@@ -4,38 +4,32 @@ require 'capybara/rails'
 
 RSpec.describe 'User View', type: :feature do
   before :each do
-    # create a user to use in our tests
     @user = User.create(name: 'Harry', photo: 'https://somewhere.com/an_ordinary_photo.jpg',
                         bio: 'Anyone in this world')
     @user.save
   end
-  # checks if the user's profile picture can be seen
-  it 'I can see the user\'s profile picture.' do
+
+  it 'I can see the user\'s profile picture' do
     visit user_path(@user)
     expect(page).to have_css("img[src*='https://somewhere.com/an_ordinary_photo.jpg']")
   end
 
-  # checks if the user's name can be seen
-  it 'I can see the user\'s username.' do
+  it 'I can see the user\'s username' do
     visit user_path(@user)
     expect(page).to have_content(@user.name)
   end
 
-  # checks the number of posts the user has written
-  it 'I can see the number of posts the user has written.' do
+  it 'I can see the number of posts the user has written' do
     visit user_path(@user)
     expect(page).to have_content(@user.posts_counter)
   end
 
-  # checks if the user's bio can be seen
-  it 'I can see the user\'s bio.' do
+  it 'I can see the user\'s bio' do
     visit user_path(@user)
     expect(page).to have_content(@user.bio)
   end
 
-  # checks the user's first 3 posts can be seen
-  it 'I can see the user\'s first 3 posts.' do
-    # create a posts to use in our test
+  it 'I can see the user\'s first 3 posts' do
     posts = [
       { title: 'trail',
         text: 'answer bent visitor raw stock elephant roof supper numeral bend previous donkey stand wild there' },
@@ -54,15 +48,12 @@ RSpec.describe 'User View', type: :feature do
     end
   end
 
-  # checks the button that lets view all of a user's posts can be seen
-  it 'I can see a button that lets me view all of a user\'s posts.' do
+  it 'I can see a button that lets me view all of a user\'s posts' do
     visit user_path(@user)
     expect(page).to have_css('.btn-primary')
   end
 
-  # checks the link to the user's post redirects to that post's show page
-  it 'When I click a user\'s post, it redirects me to that post\'s show page.' do
-    # create a post to use in our test
+  it 'When I click a user\'s post, it redirects me to that post\'s show page' do
     post = Post.create(author: @user, title: 'Nonsense', text: 'This guy should stop spitting bullshit')
     post.save
     visit user_path(@user)
@@ -70,8 +61,7 @@ RSpec.describe 'User View', type: :feature do
     expect(page).to have_current_path(user_post_path(user_id: @user.id, id: post.id))
   end
 
-  # checks the button see all posts redirects to the user's post's index page
-  it 'When I click to see all posts, it redirects me to the user\'s post\'s index page.' do
+  it 'When I click to see all posts, it redirects me to the user\'s post\'s index page' do
     visit user_path(@user)
     click_link 'See all post'
     expect(page).to have_current_path(user_posts_path(@user))
