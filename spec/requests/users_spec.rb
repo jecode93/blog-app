@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Users', type: :request do
   context 'GET /index' do
     before :each do
+      User.create(name: 'Tom')
       get users_path
     end
 
@@ -16,10 +17,6 @@ RSpec.describe 'Users', type: :request do
 
     it 'returns successful response' do
       expect(response).to be_successful
-    end
-
-    it 'renders the right placeholder' do
-      expect(response.body).to include('<h1>Here is a list for all the users</h1>')
     end
   end
 
@@ -40,10 +37,6 @@ RSpec.describe 'Users', type: :request do
 
     it 'returns successful response' do
       expect(response).to be_successful
-    end
-
-    it 'renders the right placeholder' do
-      expect(response.body).to include('<h1>Here is the user for the given id</h1>')
     end
   end
 end
