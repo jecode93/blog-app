@@ -1,8 +1,18 @@
 Rails.application.routes.draw do
+  devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   
   # Define root path
-  root to: 'users#index'
+    devise_scope :user do
+      authenticated :user do
+        root :to => 'users#index', as: :authenticated_root
+      end
+      unauthenticated :user do
+        root :to => 'login#index', as: :unauthenticated_root
+      end
+    end
+  
+  get '/login', to: 'login#index'
   
   # MY CODE
   # get '/users', to: "users#index"

@@ -14,6 +14,14 @@
   </head>
 
   <body class="container">
+    <header>
+      <% if current_user %>
+        <%= link_to "Sing out", destroy_user_session_path, 
+        'data-turbo-method': :delete, class: 'btn btn-secondary my-2' %>
+      <% end %>
+    </header>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>
