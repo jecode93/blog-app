@@ -12,6 +12,10 @@ class Post < ApplicationRecord
     author.increment!(:posts_counter)
   end
 
+  def all_comments
+    Comment.where(post_id: id)
+  end
+
   # Add validations
 
   # Title must not be blank.

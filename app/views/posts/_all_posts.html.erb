@@ -1,0 +1,9 @@
+<%= @comments_and_likes_counter %>
+<% Post.all.each do |post| %>
+    <h3><%= post.title %></h3>
+    <p><%= post.text %></p>
+    <p>Comments: <%= post.comments_counter.nil? ? "0" : post.comments_counter %> </p>
+    <p>Likes: <%= post.likes_counter.nil? ? "0" : post.likes_counter %> </p>
+    <a class="btn btn-primary"href="/users/<%= post.author_id %>/posts/<%= post.id %>">Read post</a>
+<% end %>
+

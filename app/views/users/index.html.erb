@@ -1,1 +1,23 @@
-<h1>Here is a list for all the users</h1>
+<% @users.each do |user| %>
+
+<div class="my-3 rounded border border-1">
+  <div class="card">
+    <div class="row g-0">
+      <div class="col-md-2">
+        <img src="<%= user.photo %>" class="img-fluid rounded-start" />
+      </div>
+      <div class="col-md-10">
+        <div class="card-body">
+          <h1 class="card-title"><%= user.name %></h1>
+          <div class="text-end">
+            <p>
+              Number of posts: <%= user.posts_counter.nil? ? "0" : user.posts_counter %>
+            </p>
+          </div>
+            <%= link_to "User info", user_path(user.id), class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

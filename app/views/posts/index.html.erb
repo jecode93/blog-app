@@ -1,1 +1,47 @@
-<h1>Here is a list of posts for a given user_id</h1>
+<% user = User.find(params[:user_id]) %>
+  <div class="card g-0 my-4">
+    
+    <div class="row align-items-center">
+      <div class="col-md-2">
+        <img src="<%= user.photo %>" class="img-fluid rounded-start" />
+      </div>
+      <div class="col-md-10">
+        <div class="card-body">
+          <h1 class="card-title"><%= user.name %></h1>
+          <p class="text-end">
+            Number of posts: <%= user.posts_counter.nil? ? "0" : user.posts_counter %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% @posts.each do |post| %>
+  <div class="rounded p-4 border border-1 my-4">
+    
+    <h3><%= post.title %></h3>
+    <p><%= post.text %></p>
+    <div class="text-end">
+        <span class="border border-1 p-1 me-4 bg-info">
+          Comments: <%= post.comments_counter.nil? ? " 0 " : post.comments_counter %>
+        </span>
+        <span class="border border-1 p-1 bg-info">
+          Likes: <%= post.likes_counter.nil? ? "0" : post.likes_counter %>
+        </span>
+    </div>
+    <%= link_to "Read Post", user_post_path(user.id, post), class: "btn btn-primary" %>
+    </div>
+    <div class="mb-4">
+      <% post.five_recent_comments.each do |comment| %>
+        <p><% if comment.nil? %>
+        <%= "This post has no comment" %> 
+          <% else %>
+          <h4>Comments </h4>
+          <%= comment.user.name %>: <%= comment.text %>
+          <% end %>
+        </p>
+      <% end %>
+    </div>
+<% end %>
+<div class="d-flex justify-content-center my-4">
+  <%= link_to "Pagination", user_posts_path(user_id: user.id), class: "btn btn-primary mx-auto text-center" %>
+</div>
