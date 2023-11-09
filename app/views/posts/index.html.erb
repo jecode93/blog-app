@@ -15,6 +15,12 @@
       </div>
     </div>
   </div>
+  <%= link_to 'New Post', new_user_post_path, class: 'btn btn-primary'%>
+  <div class="text-success">
+<% flash.each do |name, msg| -%>
+  <%= content_tag :div, msg, class: name %>
+<% end -%>
+  </div>
 <% @posts.each do |post| %>
   <div class="rounded p-4 border border-1 my-4">
     

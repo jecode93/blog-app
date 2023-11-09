@@ -1,0 +1,17 @@
+<h1>Create a new Comment</h1>
+
+<div class="text-success">
+  
+  <% flash.each do |name, msg| -%>
+  <%= content_tag :div, msg, class: name %>
+  <% end -%>
+</div>
+<%= form_with model: [:user, :post, @comment], data: { turbo: false }, local: true do |f| %>
+  <div class="form-group col-6">
+    <%= f.label :text %><br>
+    <%= f.text_field :text, class: 'form-control' %><br>
+    <%= f.hidden_field :user_id, value: params[:user_id] %>
+    <%= f.hidden_field :post_id, value: params[:post_id] %>
+    <%= f.submit "Comment", class: 'btn btn-primary' %>
+  </div>
+<% end %>

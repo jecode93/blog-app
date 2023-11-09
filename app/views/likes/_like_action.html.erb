@@ -1,0 +1,8 @@
+<%# <% if post.likes.indlude?(current_user.id) %>
+<%= form_with model: @like, url: user_post_likes_path(post_id: post.id, user_id: post.author_id), data: { turbo: false }, local: true, scope: :like do |f| %>
+  <div>
+    <%= f.hidden_field :user_id, value: :user_id %>
+    <%= f.hidden_field :post_id, value: :post_id %>
+    <%= f.submit "Like post", class: 'btn btn-primary' %>
+  </div>
+<% end %>

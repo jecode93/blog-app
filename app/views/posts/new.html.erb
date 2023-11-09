@@ -1,0 +1,14 @@
+<h1>Create a new Post</h1>
+
+<% flash.each do |name, msg| -%>
+  <%= content_tag :div, msg, class: name %>
+<% end -%>
+<%= form_with model: [:user, @post], data: { turbo: false }, local: true do |f| %>
+  <div class="form-group col-6">
+    <%= f.label :title %><br>
+    <%= f.text_field :title, class: 'form-control' %><br>
+    <%= f.label :text %><br>
+    <%= f.text_area :text, class: 'form-control' %><br>
+    <%= f.submit "Create Post", class: 'btn btn-primary' %>
+  </div>
+<% end %>
