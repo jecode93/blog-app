@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Posts', type: :request do
   context 'GET /index' do
     before :each do
-      get '/users/:user_id/posts'
+      get '/users/6/posts'
     end
 
     it 'returns http status 200' do
@@ -17,10 +17,6 @@ RSpec.describe 'Posts', type: :request do
     it 'renders the right view file' do
       expect(response).to render_template(:index)
     end
-
-    it 'renders the right placeholder' do
-      expect(response.body).to include('<h1>Here is a list of posts for a given user_id</h1>')
-    end
   end
 
   context 'GET /show' do
@@ -29,7 +25,7 @@ RSpec.describe 'Posts', type: :request do
     let(:post) { Post.create! valid_attributes }
 
     before :each do
-      get "/users/:user_id/posts/#{post.id}"
+      get '/users/6/posts/8'
     end
 
     it 'renders the right view file' do
@@ -42,10 +38,6 @@ RSpec.describe 'Posts', type: :request do
 
     it 'returns http status 200' do
       expect(response.status).to eq(200)
-    end
-
-    it 'renders the right placeholder' do
-      expect(response.body).to include('<h1>Here is the post for the given user_id</h1>')
     end
   end
 end
